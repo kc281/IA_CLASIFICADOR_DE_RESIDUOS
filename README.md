@@ -16,6 +16,7 @@
 </div>
 
 ---
+## Link web:https://ia-clasificador-de-residuos.vercel.app/
 
 ## 📋 Tabla de Contenidos
 1. [Descripción del Proyecto](#-descripción-del-proyecto)
