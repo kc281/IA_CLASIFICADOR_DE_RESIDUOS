@@ -70,7 +70,7 @@ Esta sección documenta el proceso técnico de construcción del modelo de Visi�
   - Validación: 896 imágenes (15%)
   - Prueba: 896 imágenes (15%)
 - **Aumentación de Datos (Data Augmentation):** Rotación (±20°), volteo horizontal, zoom (15%), y variación de brillo. Esto ayuda a que el modelo no memorice las imágenes (evita el sobreajuste).
-- **Manejo del Desbalance:** Se calcularon **Pesos de Clase** (Class Weights). La clase `biological` tenía menos imágenes (699), por lo que sus errores pesaron más (1.71) durante el entrenamiento para equilibrar el aprendizaje.
+- **Manejo del Desbalance:** Se calcularon **Pesos de Clase** . La clase `biological` tenía menos imágenes (699), por lo que sus errores pesaron más (1.71) durante el entrenamiento para equilibrar el aprendizaje.
 
 ### 2. Arquitectura y Hiperparámetros
 Se utilizó **MobileNetV2** preentrenado en ImageNet, adaptando su capa de salida a nuestras 5 clases.
@@ -83,7 +83,7 @@ Se utilizó **MobileNetV2** preentrenado en ImageNet, adaptando su capa de salid
   - *Épocas:* 10
 - **Callbacks:** `EarlyStopping` (paciencia de 5 épocas) para detener el entrenamiento si el modelo dejaba de mejorar en validación.
 
-### 3. Resultados y Métricas (Conjunto de Prueba)
+### 3. Resultados y Métricas 
 - **Accuracy Global:** ~72%
 - **F1-Macro:** 0.72
 - **Matriz de Confusión:** El modelo es altamente preciso identificando plástico (F1: 0.78) y biológicos (F1: 0.83). Presenta confusiones lógicas entre **cartón y papel** (texturas visuales similares) y entre metal y plástico.
@@ -93,39 +93,38 @@ Se utilizó **MobileNetV2** preentrenado en ImageNet, adaptando su capa de salid
 
 El proyecto tiene una duracion de  **13 semanas** (28 de agosto al 25 de noviembre). 
 
-### Gráfico de Gantt (GitHub lo renderiza automáticamente)
+### Gráfico de Gantt 
 
-```mermaid
+``mermaid
 gantt
-    title Ciclo de Vida del Proyecto de Grado (13 Semanas)
+    title Ciclo de Vida del Proyecto (13 Semanas)
     dateFormat  YYYY-MM-DD
-    axisFormat  %d %b
     
-    section Fases de Desarrollo
-    F1: Propuesta inicial           :done,    des1, 2026-08-28, 2026-09-17
-    F2: Requerimientos y Dataset    :done,    des2, 2026-09-18, 2026-10-01
-    F3: Arquitectura y Modelo       :done,    des3, 2026-10-02, 2026-10-08
-    F4: Entrenamiento de IA         :done,    des4, 2026-10-09, 2026-10-15
-    F5: Desarrollo y Despliegue     :active,  des5, 2026-10-16, 2026-10-29
-    F6: Pruebas y Sustentación      :         des6, 2026-10-30, 2026-11-25
+    section Fases
+    F1: Propuesta inicial          :done,    des1, 2026-08-28, 2026-09-17
+    F2: Requerimientos y Dataset   :done,    des2, 2026-09-18, 2026-10-01
+    F3: Arquitectura y Modelo      :done,    des3, 2026-10-02, 2026-10-08
+    F4: Entrenamiento de IA        :done,    des4, 2026-10-09, 2026-10-15
+    F5: Desarrollo y Despliegue    :active,  des5, 2026-10-16, 2026-10-29
+    F6: Pruebas y Sustentación     :         des6, 2026-10-30, 2026-11-25
 ```
 ## ☁️ Despliegue en la Nube
 
 El proyecto está preparado para producción usando servicios gratuitos:
 
-Backend (Render): Se despliega utilizando un Dockerfile (Python 3.12-slim). Nota: El plan gratuito de Render "duerme" el servicio tras 15 min de inactividad, tardando hasta 60s en la primera petición.
+****Backend (Render):** Se despliega utilizando un `Dockerfile (Python 3.12-slim)`. Nota: El plan gratuito de Render `"duerme"` el servicio tras 15 min de inactividad, tardando hasta 60s en la primera petición.
 
-Frontend (Vercel): Se despliega automáticamente mediante integración continua conectada a este repositorio. Vercel genera HTTPS automático, lo cual es obligatorio para que los navegadores permitan el acceso a la cámara web (getUserMedia).
+****Frontend (Vercel):** Se despliega automáticamente mediante integración continua conectada a este repositorio. Vercel genera HTTPS automático, lo cual es obligatorio para que los navegadores permitan el acceso a la cámara web (`getUserMedia`).
 
 ## 🛡️ Ética, Privacidad y Normativa
 
 Este proyecto académico esto  diseñado bajo  principios éticos y legales:
 
-No Almacenamiento (Privacidad): Las imágenes capturadas se procesan en memoria (BytesIO) y se destruyen tras la inferencia, en cumplimiento de la Ley 1581 de 2012 (Protección de Datos Personales).
+****No Almacenamiento (Privacidad):** Las imágenes capturadas se procesan en memoria (`BytesIO`) y se destruyen tras la inferencia, en cumplimiento de la Ley 1581 de 2012 (Protección de Datos Personales).
 
-Transparencia Algorítmica: El sistema muestra las probabilidades en tiempo real y advierte si la confianza es menor al 60%, evitando la "ceguera" del usuario ante errores de la IA.
+****Transparencia Algorítmica:** El sistema muestra las probabilidades en tiempo real y advierte si la confianza es menor al 60%, evitando la "ceguera" del usuario ante errores de la IA.
 
-Normativa Ambiental: Los colores de las canecas mostrados en el frontend están alineados con la Resolución 2184 de 2019 (Código de Colores Nacional: Verde para residuos orgánicos aprovechables, Blanco para residuos aprovechables).
+**Normativa Ambiental:** Los colores de las canecas mostrados en el frontend están alineados con la Resolución 2184 de 2019 (Código de Colores Nacional: Verde para residuos orgánicos aprovechables, Blanco para residuos aprovechables).
 
 ## 👨‍💻 Autores
 José Camilo Oyola
@@ -134,9 +133,9 @@ Juan David Villa
 
 Juan Esteban Caucayo
 
-Institución: Universidad Central - Facultad de Ingeniería y Ciencias Básicas
-Director del Proyecto: Elias Buitrago Bolivar
-Año: 2026
+**Institución:** Universidad Central - Facultad de Ingeniería y Ciencias Básicas
+**Director del Proyecto:** Elias Buitrago Bolivar
+**Año:** 2026
 
 
 
