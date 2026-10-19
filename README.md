@@ -89,12 +89,11 @@ Se utilizó **MobileNetV2** preentrenado en ImageNet, adaptando su capa de salid
 - **Matriz de Confusión:** El modelo es altamente preciso identificando plástico (F1: 0.78) y biológicos (F1: 0.83). Presenta confusiones lógicas entre **cartón y papel** (texturas visuales similares) y entre metal y plástico.
 - **Nota sobre Limitaciones:** Durante las pruebas reales, se detectó *Domain Shift* (el modelo se confunde con fondos oscuros o texturas atípicas). Por ello, se implementó un umbral de rechazo: si la confianza es < 60%, la app web muestra una alerta al usuario.
 
-## 🗺️ Cronograma del Proyecto (Roadmap)
+## 🗺️ Cronograma del Proyecto 
 
 El proyecto tiene una duracion de  **13 semanas** (28 de agosto al 25 de noviembre). 
 
-### Gráfico de Gantt 
-
+### Gráfico 
 ```mermaid
 gantt
     title Cronograma del Proyecto - 13 Semanas
