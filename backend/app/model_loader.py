@@ -59,9 +59,8 @@ def preprocess_image(image: Image.Image) -> np.ndarray:
     arr = np.array(img, dtype=np.float32)
     arr = np.expand_dims(arr, axis=0)   # (1, 224, 224, 3)
 
-    preprocess_fn = _PREPROCESS_MAP.get(config.MODEL_NAME)
-    if preprocess_fn is not None:
-        arr = preprocess_fn(arr)
+    # FIX: Usamos la misma normalización que en el entrenamiento (0 a 1)
+    arr = arr / 255.0
 
     return arr
 
