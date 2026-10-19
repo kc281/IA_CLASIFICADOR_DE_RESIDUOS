@@ -98,31 +98,30 @@ El proyecto tiene una duracion de  **13 semanas** (28 de agosto al 25 de noviemb
 ```mermaid
 gantt
     title Ciclo de Vida del Proyecto (13 Semanas)
-    dateFormat  YYYY-MM-DD
-    
+    dateFormat YYYY-MM-DD
     section Fases
-    F1: Propuesta inicial          :done,    des1, 2026-08-28, 2026-09-17
-    F2: Requerimientos y Dataset   :done,    des2, 2026-09-18, 2026-10-01
-    F3: Arquitectura y Modelo      :done,    des3, 2026-10-02, 2026-10-08
-    F4: Entrenamiento de IA        :done,    des4, 2026-10-09, 2026-10-15
-    F5: Desarrollo y Despliegue    :active,  des5, 2026-10-16, 2026-10-29
-    F6: Pruebas y Sustentación     :         des6, 2026-10-30, 2026-11-25
+    F1: Propuesta inicial          :done, des1, 2026-08-28, 2026-09-17
+    F2: Requerimientos y Dataset   :done, des2, 2026-09-18, 2026-10-01
+    F3: Arquitectura y Modelo      :done, des3, 2026-10-02, 2026-10-08
+    F4: Entrenamiento de IA        :done, des4, 2026-10-09, 2026-10-15
+    F5: Desarrollo y Despliegue    :active, des5, 2026-10-16, 2026-10-29
+    F6: Pruebas y Sustentación     : des6, 2026-10-30, 2026-11-25
 ```
 ## ☁️ Despliegue en la Nube
 
 El proyecto está preparado para producción usando servicios gratuitos:
 
-****Backend (Render):** Se despliega utilizando un `Dockerfile (Python 3.12-slim)`. Nota: El plan gratuito de Render `"duerme"` el servicio tras 15 min de inactividad, tardando hasta 60s en la primera petición.
+**Backend (Render):** Se despliega utilizando un `Dockerfile (Python 3.12-slim)`. Nota: El plan gratuito de Render `"duerme"` el servicio tras 15 min de inactividad, tardando hasta 60s en la primera petición.
 
-****Frontend (Vercel):** Se despliega automáticamente mediante integración continua conectada a este repositorio. Vercel genera HTTPS automático, lo cual es obligatorio para que los navegadores permitan el acceso a la cámara web (`getUserMedia`).
+**Frontend (Vercel):** Se despliega automáticamente mediante integración continua conectada a este repositorio. Vercel genera HTTPS automático, lo cual es obligatorio para que los navegadores permitan el acceso a la cámara web (`getUserMedia`).
 
 ## 🛡️ Ética, Privacidad y Normativa
 
 Este proyecto académico esto  diseñado bajo  principios éticos y legales:
 
-****No Almacenamiento (Privacidad):** Las imágenes capturadas se procesan en memoria (`BytesIO`) y se destruyen tras la inferencia, en cumplimiento de la Ley 1581 de 2012 (Protección de Datos Personales).
+**No Almacenamiento (Privacidad):** Las imágenes capturadas se procesan en memoria (`BytesIO`) y se destruyen tras la inferencia, en cumplimiento de la Ley 1581 de 2012 (Protección de Datos Personales).
 
-****Transparencia Algorítmica:** El sistema muestra las probabilidades en tiempo real y advierte si la confianza es menor al 60%, evitando la "ceguera" del usuario ante errores de la IA.
+**Transparencia Algorítmica:** El sistema muestra las probabilidades en tiempo real y advierte si la confianza es menor al 60%, evitando la "ceguera" del usuario ante errores de la IA.
 
 **Normativa Ambiental:** Los colores de las canecas mostrados en el frontend están alineados con la Resolución 2184 de 2019 (Código de Colores Nacional: Verde para residuos orgánicos aprovechables, Blanco para residuos aprovechables).
 
