@@ -1,4 +1,4 @@
-"""Utilidades de validación de imágenes (FR-09, FR-19, NFR-10, NFR-11)."""
+"""Utilidades de validación de imágenes """
 import logging
 from io import BytesIO
 
@@ -27,7 +27,7 @@ async def validate_image(file: UploadFile) -> Image.Image:
             detail="Formato no permitido. Use JPG, PNG o WEBP.",
         )
 
-    # 2) Leer contenido (en memoria — nunca a disco, NFR-09)
+    # 2) Leer contenido (en memoria — nunca a disco)
     contents = await file.read()
 
     # 3) Validar tamaño

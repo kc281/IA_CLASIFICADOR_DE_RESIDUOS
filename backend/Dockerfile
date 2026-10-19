@@ -11,7 +11,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiamos el resto del código (incluyendo la carpeta models/ con tu .keras)
+# Copiamos el resto del código (incluyendo la carpeta models/ con .keras)
 COPY . .
 
 # Exponemos el puerto (Render usa la variable $PORT)

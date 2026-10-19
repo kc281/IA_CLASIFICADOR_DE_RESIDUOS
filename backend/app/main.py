@@ -19,7 +19,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# ─── Lifespan: precarga el modelo al arrancar (NFR-04) ───
+# ─── Lifespan: precarga el modelo al arrancar ───
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Iniciando backend de clasificación de residuos...")
@@ -45,7 +45,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# ─── CORS (NFR-12) ───────────────────────────────
+# ─── CORS  ───────────────────────────────
 app.add_middleware(
     CORSMiddleware,
     allow_origins=config.ALLOWED_ORIGINS,
@@ -58,7 +58,7 @@ app.add_middleware(
 app.include_router(router)
 
 
-# ─── Manejadores de errores (FR-20, FR-21, NFR-13) ───
+# ─── Manejadores de errores  ───
 @app.exception_handler(RequestValidationError)
 async def validation_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(

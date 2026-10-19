@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#2E7D32', // Verde asociado a lo biológico/ambiental
+        primary: '#2E7D32', // Verde 
         secondary: '#1565C0'
       }
     },

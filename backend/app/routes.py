@@ -1,4 +1,4 @@
-"""Endpoints del API (Sección 7.1 del SRS)."""
+"""Endpoints del API """
 import logging
 from datetime import datetime, timezone
 
@@ -44,10 +44,10 @@ async def predict_endpoint(file: UploadFile = File(...)) -> PredictionResponse:
     - Preprocesa e infiere
     - Devuelve clase, confianza y probabilidades por clase
     """
-    # 1) Validar imagen (FR-09, FR-19)
+    # 1) Validar imagen 
     image = await validate_image(file)
 
-    # 2) Inferencia (FR-10 a FR-12)
+    # 2) Inferencia 
     try:
         result = predict_model(image)
     except Exception:
@@ -57,7 +57,7 @@ async def predict_endpoint(file: UploadFile = File(...)) -> PredictionResponse:
             detail="Ocurrió un error interno. Intente de nuevo.",
         )
 
-    # 3) Timestamp (FR-21)
+    # 3) Timestamp 
     result["timestamp"] = datetime.now(timezone.utc).isoformat()
 
     return PredictionResponse(**result)

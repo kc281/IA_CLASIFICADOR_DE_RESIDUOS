@@ -26,7 +26,7 @@ CLASSES_LABELS_ES: Dict[str, str] = {
     "plastic":    "Plástico",
 }
 
-# Colores según Resolución 2184 de 2019 (FR-23)
+# Colores según Resolución 2184 de 2019 
 CLASSES_COLORS: Dict[str, str] = {
     "biological": "verde",
     "cardboard":  "blanco",
@@ -35,15 +35,15 @@ CLASSES_COLORS: Dict[str, str] = {
     "plastic":    "blanco",
 }
 
-# ─── Validación de archivos (NFR-10, NFR-11) ─────
+# ─── Validación de archivos  ─────
 MAX_FILE_SIZE_MB = int(os.getenv("MAX_FILE_SIZE_MB", 5))
 MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
 ALLOWED_MIME_TYPES: Set[str] = {"image/jpeg", "image/png", "image/webp"}
 
-# ─── Umbral de confianza (FR-17) ─────────────────
+# ─── Umbral de confianza  ─────────────────
 LOW_CONFIDENCE_THRESHOLD = float(os.getenv("LOW_CONFIDENCE_THRESHOLD", 0.60))
 
-# ─── CORS (NFR-12) ───────────────────────────────
+# ─── CORS  ───────────────────────────────
 ALLOWED_ORIGINS: List[str] = [
     o.strip() for o in os.getenv(
         "ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:5173"

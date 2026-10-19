@@ -157,7 +157,7 @@ function App() {
 
       <footer className="mt-8 text-sm text-gray-500 text-center max-w-md">
         <p>Prototipo académico - Universidad Central</p>
-        <p>Alineado con la Resolución 2184 de 2019 (Código de Colores)</p>
+        <p>Alineado con la Resolución 2184 de 2019 (Código de Colores para la Separacion de Residuos)</p>
       </footer>
     </div>
   );
