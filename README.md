@@ -1,6 +1,7 @@
 <div align="center">
   <h1> Clasificador de Residuos IA </h1>
-  <p>Prototipo web para la clasificación de residuos sólidos mediante Visión por Computadora e Inteligencia Artificial.</p>
+  <p>PROTOTIPO WEB PARA LA CLASIFICACIÓN DE RESIDUOS MEDIANTE RECONOCIMIENTO DE IMÁGENES E INTELIGENCIA ARTIFICIAL
+.</p>
 
   <!-- Badges / Insignias -->
   <p>
