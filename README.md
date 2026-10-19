@@ -95,7 +95,7 @@ El proyecto tiene una duracion de  **13 semanas** (28 de agosto al 25 de noviemb
 
 ### Gráfico de Gantt 
 
-```
+```mermaid
 gantt
     title Cronograma del Proyecto - 13 Semanas
     dateFormat YYYY-MM-DD
