@@ -95,17 +95,16 @@ El proyecto tiene una duracion de  **13 semanas** (28 de agosto al 25 de noviemb
 
 ### Gráfico de Gantt 
 
-```mermaid
-gantt
-    title Ciclo de Vida del Proyecto (13 Semanas)
+```gantt
+    title Cronograma del Proyecto - 13 Semanas
     dateFormat YYYY-MM-DD
     section Fases
-    F1: Propuesta inicial          :done, des1, 2026-08-28, 2026-09-17
-    F2: Requerimientos y Dataset   :done, des2, 2026-09-18, 2026-10-01
-    F3: Arquitectura y Modelo      :done, des3, 2026-10-02, 2026-10-08
-    F4: Entrenamiento de IA        :done, des4, 2026-10-09, 2026-10-15
-    F5: Desarrollo y Despliegue    :active, des5, 2026-10-16, 2026-10-29
-    F6: Pruebas y Sustentación     : des6, 2026-10-30, 2026-11-25
+    F1 Propuesta inicial          :done, des1, 2026-08-28, 2026-09-17
+    F2 Requerimientos y Dataset   :done, des2, 2026-09-18, 2026-10-01
+    F3 Arquitectura y Modelo      :done, des3, 2026-10-02, 2026-10-08
+    F4 Entrenamiento de IA        :done, des4, 2026-10-09, 2026-10-15
+    F5 Desarrollo y Despliegue    :active, des5, 2026-10-16, 2026-10-29
+    F6 Pruebas y Sustentación     : des6, 2026-10-30, 2026-11-25
 ```
 ## ☁️ Despliegue en la Nube
 
