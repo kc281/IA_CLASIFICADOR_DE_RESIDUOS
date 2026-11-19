@@ -131,7 +131,7 @@ El modelo demostró una capacidad de generalización sólida a pesar del desbala
 
 
 
-### 🛡️ 2. Pruebas de Robustez (Condiciones Adversas)
+### 🛡️ 2. Pruebas de Robustez 
 Se evaluó la resiliencia del modelo aplicando transformaciones a las imágenes para simular condiciones del mundo real:
 
 | Condición de la Imagen | F1-Macro | Impacto | Análisis |
@@ -141,9 +141,9 @@ Se evaluó la resiliencia del modelo aplicando transformaciones a las imágenes 
 | **Girada 90°** | 0.7237 | -3.58 pts | Alta invariancia espacial (capas convolucionales). |
 | **Baja Resolución** | 0.4268 | -33.27 pts | La pérdida de texturas finas (letras, reflejos) afecta gravemente la predicción. |
 
-### ⚡ 3. Latencia End-to-End (Experiencia de Usuario)
+### ⚡ 3. Latencia End-to-End 
 Mediante Chrome DevTools, se midió el tiempo real que percibe el usuario al usar la app en producción:
-*   **Cold Start (Primer arranque):** ~90 segundos. Ocurre porque el servicio en la nube (Render) "duerme" por inactividad y TensorFlow debe cargar el modelo `.h5` de 9 MB en la memoria RAM.
+*   **Cold Start (Primer arranque):** ~90 segundos. Ocurre porque el servicio en la nube (Render) "duerme" por inactividad y TensorFlow debe cargar el modelo .
 *   **Peticiones en caliente:** **~2.5 segundos** promedio. Este tiempo incluye la transferencia de la imagen, la inferencia en el backend y el renderizado del resultado en React.
 
 ### 🚀 4. Pruebas de Carga y Estrés
@@ -161,7 +161,7 @@ Se utilizaron herramientas como **Locust** y scripts de **ráfagas concurrentes*
 *   **Resiliencia (Manejo de Errores):** Al apagar el servidor intencionalmente, el frontend **no colapsa**; muestra una ventana modal amigable indicando *"Error: No se pudo conectar con el servidor"*.
 *   **Transparencia:** Se muestra un panel con las probabilidades de cada clase, y si la confianza es < 60%, el sistema advierte al usuario para que verifique manualmente.
 
-*(Los scripts de prueba utilizados, como `evaluar_modelo.py`, `test_concurrencia.py` y la configuración de `pytest`, están disponibles en la raíz del repositorio).*
+*(Los scripts de prueba utilizados, como `evaluar_modelo.py`, `test_concurrencia.py`,`test_robustez.py` y la configuración de `pytest`, están disponibles en la raíz del repositorio).*
 
 ## 🛡️ Ética, Privacidad y Normativa
 
