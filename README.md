@@ -116,6 +116,53 @@ El proyecto está preparado para producción usando servicios gratuitos:
 
 **Frontend (Vercel):** Se despliega automáticamente mediante integración continua conectada a este repositorio. Vercel genera HTTPS automático, lo cual es obligatorio para que los navegadores permitan el acceso a la cámara web (`getUserMedia`).
 
+## 🧪 Pruebas y Validación (Testing)
+
+Para garantizar la calidad del sistema, se ejecutó un exhaustivo plan de pruebas sobre 75 imágenes de validación (15 por cada clase) extraídas del dataset original, asegurando que el modelo no las hubiera visto durante el entrenamiento.
+
+### 📊 1. Resultados del Modelo de IA 
+El modelo demostró una capacidad de generalización sólida a pesar del desbalance de datos original (donde la clase `biological` tenía menos muestras). Gracias al uso de pesos de clase durante el entrenamiento, se obtuvieron los siguientes resultados:
+
+| Métrica | Valor Obtenido | Criterio de Aceptación |
+| :--- | :--- | :--- |
+| **F1-Macro Global** | **0.7595** | ≥ 0.70 (Superado) |
+| **Accuracy (Exactitud)** | **76%** | - |
+| **Latencia (CPU)** | **44.4 ms** (p95) | < 2000 ms (Superado) |
+
+
+
+### 🛡️ 2. Pruebas de Robustez (Condiciones Adversas)
+Se evaluó la resiliencia del modelo aplicando transformaciones a las imágenes para simular condiciones del mundo real:
+
+| Condición de la Imagen | F1-Macro | Impacto | Análisis |
+| :--- | :--- | :--- | :--- |
+| **Original** | 0.7595 | - | Línea base del modelo. |
+| **Oscura (Brillo 40%)** | 0.6867 | -7.28 pts | Dependencia de contrastes y bordes. |
+| **Girada 90°** | 0.7237 | -3.58 pts | Alta invariancia espacial (capas convolucionales). |
+| **Baja Resolución** | 0.4268 | -33.27 pts | La pérdida de texturas finas (letras, reflejos) afecta gravemente la predicción. |
+
+### ⚡ 3. Latencia End-to-End (Experiencia de Usuario)
+Mediante Chrome DevTools, se midió el tiempo real que percibe el usuario al usar la app en producción:
+*   **Cold Start (Primer arranque):** ~90 segundos. Ocurre porque el servicio en la nube (Render) "duerme" por inactividad y TensorFlow debe cargar el modelo `.h5` de 9 MB en la memoria RAM.
+*   **Peticiones en caliente:** **~2.5 segundos** promedio. Este tiempo incluye la transferencia de la imagen, la inferencia en el backend y el renderizado del resultado en React.
+
+### 🚀 4. Pruebas de Carga y Estrés
+Se utilizaron herramientas como **Locust** y scripts de **ráfagas concurrentes** (Python) para determinar los límites del backend (FastAPI):
+
+*   **Locust (Carga Continua):** 
+    *   *20 usuarios simultáneos:* Latencia de 199 ms, 0% de fallos.
+    *   *50 usuarios simultáneos:* Latencia de 1.2 segundos, 0% de fallos. El RPS (peticiones por segundo) se estabilizó en 15.4, demostrando que la CPU local es el cuello de botella, pero el servidor **nunca colapsó**.
+*   **Prueba de Ráfagas (Envíos masivos simultáneos):**
+    *   Se enviaron lotes de 5, 20 y 50 imágenes exactamente al mismo tiempo.
+    *   **Resultado:** El sistema procesó el **100% de las imágenes exitosamente (0 fallos)** en todos los lotes. El tiempo de respuesta por imagen aumentó a ~3.2 segundos en ráfagas altas debido al encolamiento del procesador, pero la arquitectura asíncrona de FastAPI demostró una estabilidad absoluta.
+
+### 🖥️ 5. Pruebas Funcionales de Frontend (UI/UX)
+*   **Flujo Exitoso:** La interfaz renderiza correctamente las etiquetas en español, el porcentaje de confianza y aplica el color de la caneca correspondiente (ej. Verde para Biológicos, Blanco para Plástico).
+*   **Resiliencia (Manejo de Errores):** Al apagar el servidor intencionalmente, el frontend **no colapsa**; muestra una ventana modal amigable indicando *"Error: No se pudo conectar con el servidor"*.
+*   **Transparencia:** Se muestra un panel con las probabilidades de cada clase, y si la confianza es < 60%, el sistema advierte al usuario para que verifique manualmente.
+
+*(Los scripts de prueba utilizados, como `evaluar_modelo.py`, `test_concurrencia.py` y la configuración de `pytest`, están disponibles en la raíz del repositorio).*
+
 ## 🛡️ Ética, Privacidad y Normativa
 
 Este proyecto académico esto  diseñado bajo  principios éticos y legales:
