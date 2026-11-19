@@ -12,7 +12,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Obtenemos la ruta del .env (por si acaso dice "models/...")
-env_model_path = os.getenv("MODEL_PATH", "models/mobilenetv2_waste.h5")
+env_model_path = os.getenv("MODEL_PATH", "models/mobilenetv2_waste.keras")
 MODEL_PATH = Path(env_model_path)
 
 
