@@ -11,7 +11,7 @@ from app import config
 
 logger = logging.getLogger(__name__)
 
-# ─── Importación diferida de TensorFlow (evita arranque lento si falla) ───
+# ─── Importación de TensorFlow ───
 try:
     from tensorflow.keras.models import load_model
     from tensorflow.keras.applications.mobilenet_v2 import (
@@ -21,23 +21,17 @@ try:
         preprocess_input as resnet_preprocess,
     )
     TF_AVAILABLE = True
-except ImportError:  # pragma: no cover
+except ImportError:
     TF_AVAILABLE = False
     logger.warning("TensorFlow no disponible. La inferencia fallará.")
-
-# Mapa de funciones de preprocesamiento según el modelo
-_PREPROCESS_MAP = {
-    "MobileNetV2": mobilenet_preprocess,
-    "ResNet50":    resnet_preprocess,
-}
+    # Definimos variables dummy para que el archivo no se rompa si TF falla
+    mobilenet_preprocess = None
+    resnet_preprocess = None
 
 
 @lru_cache(maxsize=1)
 def get_model():
-    """
-    Carga el modelo una sola vez y lo mantiene en memoria.
-    Llamado al arrancar (lifespan) para cumplir NFR-04 (≤ 30 s).
-    """
+    """Carga el modelo una sola vez y lo mantiene en memoria."""
     if not TF_AVAILABLE:
         raise RuntimeError("TensorFlow no está instalado. Ejecute: pip install tensorflow-cpu")
 
@@ -59,16 +53,14 @@ def preprocess_image(image: Image.Image) -> np.ndarray:
     arr = np.array(img, dtype=np.float32)
     arr = np.expand_dims(arr, axis=0)   # (1, 224, 224, 3)
 
-    # El modelo fue entrenado con valores de 0 a 1
+    # El preprocesamiento que dio el mejor F1-Macro (0.76) en las pruebas
     arr = arr / 255.0
 
     return arr
 
+
 def predict(image: Image.Image) -> Dict:
-    """
-    Ejecuta la inferencia y devuelve el diccionario con la predicción
-    (contrato de la Sección 7.2 del SRS).
-    """
+    """Ejecuta la inferencia y devuelve el diccionario con la predicción."""
     model = get_model()
     arr = preprocess_image(image)
 
