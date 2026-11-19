@@ -59,19 +59,11 @@ def preprocess_image(image: Image.Image) -> np.ndarray:
     arr = np.array(img, dtype=np.float32)
     arr = np.expand_dims(arr, axis=0)   # (1, 224, 224, 3)
 
-<<<<<<< HEAD
     # El modelo fue entrenado con valores de 0 a 1
-=======
-    # FIX: Usamos la misma normalización que en el entrenamiento (0 a 1)
->>>>>>> ba71ef6837e07f4401cc02bb7ee7edab7fd4e672
     arr = arr / 255.0
 
     return arr
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ba71ef6837e07f4401cc02bb7ee7edab7fd4e672
 def predict(image: Image.Image) -> Dict:
     """
     Ejecuta la inferencia y devuelve el diccionario con la predicción

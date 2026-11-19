@@ -1,7 +1,3 @@
 {
-<<<<<<< HEAD
-=======
-    "python-envs.defaultEnvManager": "ms-python.python:system",
->>>>>>> ba71ef6837e07f4401cc02bb7ee7edab7fd4e672
     "python.terminal.useEnvFile": true
 }

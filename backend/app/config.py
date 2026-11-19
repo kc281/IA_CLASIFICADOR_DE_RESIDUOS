@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ─── Rutas ───────────────────────────────────────
-<<<<<<< HEAD
 # BASE_DIR apunta a la carpeta 'backend'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,10 +18,6 @@ MODEL_PATH = Path(env_model_path)
 
 if not MODEL_PATH.is_absolute():
     MODEL_PATH = BASE_DIR / MODEL_PATH
-=======
-BASE_DIR = Path(__file__).resolve().parent.parent
-MODEL_PATH = Path(os.getenv("MODEL_PATH", BASE_DIR / "models" / "mobilenetv2_waste.h5"))
->>>>>>> ba71ef6837e07f4401cc02bb7ee7edab7fd4e672
 
 # ─── Modelo ──────────────────────────────────────
 MODEL_NAME = os.getenv("MODEL_NAME", "MobileNetV2")   # "MobileNetV2" | "ResNet50"
