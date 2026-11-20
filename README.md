@@ -120,7 +120,23 @@ El proyecto está preparado para producción usando servicios gratuitos:
 
 Para garantizar la calidad del sistema, se ejecutó un exhaustivo plan de pruebas sobre 75 imágenes de validación (15 por cada clase) extraídas del dataset original, asegurando que el modelo no las hubiera visto durante el entrenamiento.
 
-### 📊 1. Resultados del Modelo de IA 
+### 🤖 1. Pruebas Automatizadas de la API (Backend)
+
+Para garantizar que el servidor (FastAPI) sea robusto, seguro y no se caiga ante peticiones mal formadas, se implementó una suite de pruebas automatizadas utilizando **`pytest`** y el **`TestClient`** de FastAPI .
+
+
+#### Casos de Prueba Evaluados
+
+| ID | Endpoint / Caso | Descripción | Resultado Esperado | Estado |
+| :--- | :--- | :--- | :--- | :--- |
+| **A1** | `GET /docs` | Disponibilidad de la documentación (Swagger UI). | `200 OK` y HTML válido. | ✅ PASÓ |
+| **A2** | `POST /predict` (Válido) | Envío de una imagen real para clasificación. | `200 OK` con JSON (clase y confianza). | ✅ PASÓ |
+| **A3** | `POST /predict` (Sin archivo) | Petición vacía al endpoint de inferencia. | Error de validación `422 Unprocessable Entity`. | ✅ PASÓ |
+| **A4** | `OPTIONS /predict` | Validación de políticas CORS (para React en Vercel). | `200 OK` con cabecera `Access-Control-Allow-Origin`. | ✅ PASÓ |
+| **Extra** | `GET /health` & `/model-info` | Verificación de estado del servidor y metadatos del modelo. | `200 OK`. | ✅ PASÓ |
+
+
+### 📊 2. Resultados del Modelo de IA 
 El modelo demostró una capacidad de generalización sólida a pesar del desbalance de datos original (donde la clase `biological` tenía menos muestras). Gracias al uso de pesos de clase durante el entrenamiento, se obtuvieron los siguientes resultados:
 
 | Métrica | Valor Obtenido | Criterio de Aceptación |
@@ -130,8 +146,7 @@ El modelo demostró una capacidad de generalización sólida a pesar del desbala
 | **Latencia (CPU)** | **44.4 ms** (p95) | < 2000 ms (Superado) |
 
 
-
-### 🛡️ 2. Pruebas de Robustez 
+### 🛡️ 3. Pruebas de Robustez 
 Se evaluó la resiliencia del modelo aplicando transformaciones a las imágenes para simular condiciones del mundo real:
 
 | Condición de la Imagen | F1-Macro | Impacto | Análisis |
@@ -141,12 +156,12 @@ Se evaluó la resiliencia del modelo aplicando transformaciones a las imágenes 
 | **Girada 90°** | 0.7237 | -3.58 pts | Alta invariancia espacial (capas convolucionales). |
 | **Baja Resolución** | 0.4268 | -33.27 pts | La pérdida de texturas finas (letras, reflejos) afecta gravemente la predicción. |
 
-### ⚡ 3. Latencia End-to-End 
+### ⚡ 4. Latencia End-to-End 
 Mediante Chrome DevTools, se midió el tiempo real que percibe el usuario al usar la app en producción:
 *   **Cold Start (Primer arranque):** ~90 segundos. Ocurre porque el servicio en la nube (Render) "duerme" por inactividad y TensorFlow debe cargar el modelo .
 *   **Peticiones en caliente:** **~2.5 segundos** promedio. Este tiempo incluye la transferencia de la imagen, la inferencia en el backend y el renderizado del resultado en React.
 
-### 🚀 4. Pruebas de Carga y Estrés
+### 🚀 5. Pruebas de Carga y Estrés
 Se utilizaron herramientas como **Locust** y scripts de **ráfagas concurrentes** (Python) para determinar los límites del backend (FastAPI):
 
 *   **Locust (Carga Continua):** 
@@ -156,7 +171,7 @@ Se utilizaron herramientas como **Locust** y scripts de **ráfagas concurrentes*
     *   Se enviaron lotes de 5, 20 y 50 imágenes exactamente al mismo tiempo.
     *   **Resultado:** El sistema procesó el **100% de las imágenes exitosamente (0 fallos)** en todos los lotes. El tiempo de respuesta por imagen aumentó a ~3.2 segundos en ráfagas altas debido al encolamiento del procesador, pero la arquitectura asíncrona de FastAPI demostró una estabilidad absoluta.
 
-### 🖥️ 5. Pruebas Funcionales de Frontend (UI/UX)
+### 🖥️ 6. Pruebas Funcionales de Frontend (UI/UX)
 *   **Flujo Exitoso:** La interfaz renderiza correctamente las etiquetas en español, el porcentaje de confianza y aplica el color de la caneca correspondiente (ej. Verde para Biológicos, Blanco para Plástico).
 *   **Resiliencia (Manejo de Errores):** Al apagar el servidor intencionalmente, el frontend **no colapsa**; muestra una ventana modal amigable indicando *"Error: No se pudo conectar con el servidor"*.
 *   **Transparencia:** Se muestra un panel con las probabilidades de cada clase, y si la confianza es < 60%, el sistema advierte al usuario para que verifique manualmente.
